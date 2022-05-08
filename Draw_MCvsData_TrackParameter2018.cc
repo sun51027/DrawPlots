@@ -17,23 +17,24 @@ void Draw_MCvsData_TrackParameter2018()
   TDirectory *NOTRG2 = (TDirectory *)fin2->Get("HLT_Photon200");
   NOTRG2->cd();
 
-  TH1D *MC_RZPar0;
-  TH1D *MC_RZPar1;
-  TH1D *MC_RZPar2;
-  TH1D *MC_XYPar0;
-  TH1D *MC_XYPar1;
-  TH1D *MC_XYPar2;
-  MC_RZPar0 = (TH1D *)NOTRG2->Get("RZPar0");
-  MC_RZPar1 = (TH1D *)NOTRG2->Get("RZPar1");
-  MC_RZPar2 = (TH1D *)NOTRG2->Get("RZcurv");
-  MC_XYPar0 = (TH1D *)NOTRG2->Get("XYPar0");
-  MC_XYPar1 = (TH1D *)NOTRG2->Get("XYPar1");
-  MC_XYPar2 = (TH1D *)NOTRG2->Get("XYPar2");
-
+  TH1D *RZPar0_MC[10];
+  TH1D *RZPar1_MC[10];
+  TH1D *RZPar2_MC[10];
+  TH1D *XYPar0_MC[10];
+  TH1D *XYPar1_MC[10];
+  TH1D *XYPar2_MC[10];
+	for(int i=0;i<9;i++){
+  RZPar0_MC[i] = (TH1D *)NOTRG[i]->Get("RZPar0");
+  RZPar1_MC[i] = (TH1D *)NOTRG[i]->Get("RZPar1");
+  RZPar2_MC[i] = (TH1D *)NOTRG[i]->Get("RZcurv");
+  XYPar0_MC[i] = (TH1D *)NOTRG[i]->Get("XYPar0");
+  XYPar1_MC[i] = (TH1D *)NOTRG[i]->Get("XYPar1");
+  XYPar2_MC[i] = (TH1D *)NOTRG[i]->Get("XYPar2");
+	}
   TH1D *Data_RZPar0;
   Data_RZPar0 = (TH1D *)NOTRG1->Get("RZPar0");
   Data_RZPar0->SetXTitle("cm ( z direction)");
-  Data_RZPar0->Scale(MC_RZPar0->Integral() / Data_RZPar0->Integral());
+  Data_RZPar0->Scale(RZPar0_MC->Integral() / Data_RZPar0->Integral());
   Data_RZPar0->SetYTitle("Entries");
   Data_RZPar0->SetTitle("");
   Data_RZPar0->Draw("HIST");
@@ -44,7 +45,7 @@ void Draw_MCvsData_TrackParameter2018()
 
   TH1D *Data_RZPar1;
   Data_RZPar1 = (TH1D *)NOTRG1->Get("RZPar1");
-  Data_RZPar1->Scale(MC_RZPar1->Integral() / Data_RZPar1->Integral());
+  Data_RZPar1->Scale(RZPar1_MC->Integral() / Data_RZPar1->Integral());
   Data_RZPar1->SetXTitle("gradient in RZ plane");
   Data_RZPar1->SetYTitle("Entries");
   Data_RZPar1->SetTitle("");
@@ -56,7 +57,7 @@ void Draw_MCvsData_TrackParameter2018()
 
   TH1D *Data_RZPar2;
   Data_RZPar2 = (TH1D *)NOTRG1->Get("RZcurv");
-  Data_RZPar2->Scale(MC_RZPar2->Integral() / Data_RZPar2->Integral());
+  Data_RZPar2->Scale(RZPar2_MC->Integral() / Data_RZPar2->Integral());
   Data_RZPar2->SetXTitle("RZ curvature");
   Data_RZPar2->SetYTitle("Entries");
   Data_RZPar2->SetTitle("");
@@ -68,7 +69,7 @@ void Draw_MCvsData_TrackParameter2018()
 
   TH1D *Data_XYPar0;
   Data_XYPar0 = (TH1D *)NOTRG1->Get("XYPar0");
-  Data_XYPar0->Scale(MC_XYPar0->Integral() / Data_XYPar0->Integral());
+  Data_XYPar0->Scale(XYPar0_MC->Integral() / Data_XYPar0->Integral());
   Data_XYPar0->SetXTitle("d_{0} impact parameter");
   Data_XYPar0->SetYTitle("Entries");
   Data_XYPar0->SetTitle("");
@@ -80,7 +81,7 @@ void Draw_MCvsData_TrackParameter2018()
 
   TH1D *Data_XYPar1;
   Data_XYPar1 = (TH1D *)NOTRG1->Get("XYPar1");
-  Data_XYPar1->Scale(MC_XYPar1->Integral() / Data_XYPar1->Integral());
+  Data_XYPar1->Scale(XYPar1_MC->Integral() / Data_XYPar1->Integral());
   Data_XYPar1->SetXTitle("#phi_{0}");
   Data_XYPar1->SetYTitle("Entries");
   Data_XYPar1->SetTitle("");
@@ -92,7 +93,7 @@ void Draw_MCvsData_TrackParameter2018()
 
   TH1D *Data_XYPar2;
   Data_XYPar2 = (TH1D *)NOTRG1->Get("XYPar2");
-  Data_XYPar2->Scale(MC_XYPar2->Integral() / Data_XYPar2->Integral());
+  Data_XYPar2->Scale(XYPar2_MC->Integral() / Data_XYPar2->Integral());
   Data_XYPar2->SetXTitle("cm (radius)");
   Data_XYPar2->SetYTitle("Entries");
   Data_XYPar2->SetTitle("");
