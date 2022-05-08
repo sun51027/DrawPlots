@@ -1,5 +1,5 @@
 //
-//	Draw tracking parameters 
+//	Draw tracking parameters
 //	Data vs MC
 //
 #include <string>
@@ -8,14 +8,43 @@ void Draw_MCvsData_TrackParameter2018()
 {
 
   TCanvas    *canvas = new TCanvas("canvas", "", 800, 600);
-  TFile      *fin0   = new TFile("BlindAnalysis.root");
-  TDirectory *NOTRG0 = (TDirectory *)fin1->Get("HLT_Photon");
-  NOTRG0->cd();
+  TFile      *fin0   = new TFile("RootFile/MonoData2018_Plot.root");
+  fin0->cd();
   gStyle->SetOptStat(0);
 
-  TFile      *fin2   = new TFile("MonoPhotonAnalysis_2018_1000.root");
-  TDirectory *NOTRG2 = (TDirectory *)fin2->Get("HLT_Photon200");
-  NOTRG2->cd();
+  TDirectory *dir[10];
+
+  TFile *fin1 = new TFile("RootFile/MonoPhotonAnalysis_2018_1000_0.root");
+  dir[1]      = (TDirectory*)fin1->Get("HLT_Photon200");
+  dir[1]->cd();
+
+  TFile *fin2 = new TFile("RootFile/MonoPhotonAnalysis_2018_1500_0.root");
+  dir[2]      = (TDirectory*)fin2->Get("HLT_Photon200");
+  dir[2]->cd();
+
+  TFile *fin3 = new TFile("RootFile/MonoPhotonAnalysis_2018_2000_0.root");
+  dir[3]      = (TDirectory *)fin3->Get("HLT_Photon200");
+  dir[3]->cd();
+
+  TFile *fin4 = new TFile("RootFile/MonoPhotonAnalysis_2018_2500_0.root");
+  dir[4]      = (TDirectory *)fin4->Get("HLT_Photon200");
+  dir[4]->cd();
+
+  TFile *fin5 = new TFile("RootFile/MonoPhotonAnalysis_2018_3000_0.root");
+  dir[5]      = (TDirectory *)fin5->Get("HLT_Photon200");
+  dir[5]->cd();
+
+  TFile *fin6 = new TFile("RootFile/MonoPhotonAnalysis_2018_3500_0.root");
+  dir[6]      = (TDirectory *)fin6->Get("HLT_Photon200");
+  dir[6]->cd();
+
+  TFile *fin7 = new TFile("RootFile/MonoPhotonAnalysis_2018_4000_0.root");
+  dir[7]      = (TDirectory *)fin7->Get("HLT_Photon200");
+  dir[7]->cd();
+
+  TFile *fin8 = new TFile("RootFile/MonoPhotonAnalysis_2018_4500_0.root");
+  dir[8]      = (TDirectory *)fin8->Get("HLT_Photon200");
+  dir[8]->cd();
 
   TH1D *RZPar0_MC[10];
   TH1D *RZPar1_MC[10];
@@ -23,28 +52,35 @@ void Draw_MCvsData_TrackParameter2018()
   TH1D *XYPar0_MC[10];
   TH1D *XYPar1_MC[10];
   TH1D *XYPar2_MC[10];
-	for(int i=0;i<9;i++){
-  RZPar0_MC[i] = (TH1D *)NOTRG[i]->Get("RZPar0");
-  RZPar1_MC[i] = (TH1D *)NOTRG[i]->Get("RZPar1");
-  RZPar2_MC[i] = (TH1D *)NOTRG[i]->Get("RZcurv");
-  XYPar0_MC[i] = (TH1D *)NOTRG[i]->Get("XYPar0");
-  XYPar1_MC[i] = (TH1D *)NOTRG[i]->Get("XYPar1");
-  XYPar2_MC[i] = (TH1D *)NOTRG[i]->Get("XYPar2");
-	}
+  for (int i = 1; i < 9; i++) {
+    RZPar0_MC[i] = (TH1D *)dir[i]->Get("RZPar0");
+    RZPar1_MC[i] = (TH1D *)dir[i]->Get("RZPar1");
+    RZPar2_MC[i] = (TH1D *)dir[i]->Get("RZcurv");
+    XYPar0_MC[i] = (TH1D *)dir[i]->Get("XYPar0");
+    XYPar1_MC[i] = (TH1D *)dir[i]->Get("XYPar1");
+    XYPar2_MC[i] = (TH1D *)dir[i]->Get("XYPar2");
+  }
+
   TH1D *Data_RZPar0;
-  Data_RZPar0 = (TH1D *)NOTRG1->Get("RZPar0");
+  Data_RZPar0 = (TH1D *)fin0->Get("Plot_RZPar0");
   Data_RZPar0->SetXTitle("cm ( z direction)");
-  Data_RZPar0->Scale(RZPar0_MC->Integral() / Data_RZPar0->Integral());
+  Data_RZPar0->Scale(1 / Data_RZPar0->Integral());
+	for(int i=1;i<9;i++){
+					RZPar0_MC[i]->Scale(1/RZPar0_MC[i]->Integral());
+	}
   Data_RZPar0->SetYTitle("Entries");
   Data_RZPar0->SetTitle("");
-  Data_RZPar0->Draw("HIST");
+  Data_RZPar0->Draw("E");
+	for(int i=1;i<9;i++){
+					RZPar0_MC[i]->Draw("same hist");
+	}
   mgr::SetSinglePad(canvas);
   mgr::SetAxis(Data_RZPar0);
   mgr::DrawEntryRight("2018 13TeV");
   canvas->SaveAs("./Plots/Data2018RZPar0.pdf");
-
+/*
   TH1D *Data_RZPar1;
-  Data_RZPar1 = (TH1D *)NOTRG1->Get("RZPar1");
+  Data_RZPar1 = (TH1D *)fin0->Get("RZPar1");
   Data_RZPar1->Scale(RZPar1_MC->Integral() / Data_RZPar1->Integral());
   Data_RZPar1->SetXTitle("gradient in RZ plane");
   Data_RZPar1->SetYTitle("Entries");
@@ -56,7 +92,7 @@ void Draw_MCvsData_TrackParameter2018()
   canvas->SaveAs("./Plots/Data2018RZPar1.pdf");
 
   TH1D *Data_RZPar2;
-  Data_RZPar2 = (TH1D *)NOTRG1->Get("RZcurv");
+  Data_RZPar2 = (TH1D *)fin0->Get("RZcurv");
   Data_RZPar2->Scale(RZPar2_MC->Integral() / Data_RZPar2->Integral());
   Data_RZPar2->SetXTitle("RZ curvature");
   Data_RZPar2->SetYTitle("Entries");
@@ -68,7 +104,7 @@ void Draw_MCvsData_TrackParameter2018()
   canvas->SaveAs("./Plots/Data2018RZPar2.pdf");
 
   TH1D *Data_XYPar0;
-  Data_XYPar0 = (TH1D *)NOTRG1->Get("XYPar0");
+  Data_XYPar0 = (TH1D *)fin0->Get("XYPar0");
   Data_XYPar0->Scale(XYPar0_MC->Integral() / Data_XYPar0->Integral());
   Data_XYPar0->SetXTitle("d_{0} impact parameter");
   Data_XYPar0->SetYTitle("Entries");
@@ -80,7 +116,7 @@ void Draw_MCvsData_TrackParameter2018()
   canvas->SaveAs("./Plots/Data2018XYPar0.pdf");
 
   TH1D *Data_XYPar1;
-  Data_XYPar1 = (TH1D *)NOTRG1->Get("XYPar1");
+  Data_XYPar1 = (TH1D *)fin0->Get("XYPar1");
   Data_XYPar1->Scale(XYPar1_MC->Integral() / Data_XYPar1->Integral());
   Data_XYPar1->SetXTitle("#phi_{0}");
   Data_XYPar1->SetYTitle("Entries");
@@ -92,7 +128,7 @@ void Draw_MCvsData_TrackParameter2018()
   canvas->SaveAs("./Plots/Data2018XYPar1.pdf");
 
   TH1D *Data_XYPar2;
-  Data_XYPar2 = (TH1D *)NOTRG1->Get("XYPar2");
+  Data_XYPar2 = (TH1D *)fin0->Get("XYPar2");
   Data_XYPar2->Scale(XYPar2_MC->Integral() / Data_XYPar2->Integral());
   Data_XYPar2->SetXTitle("cm (radius)");
   Data_XYPar2->SetYTitle("Entries");
@@ -102,11 +138,11 @@ void Draw_MCvsData_TrackParameter2018()
   mgr::SetAxis(Data_XYPar2);
   mgr::DrawEntryRight("2018 13TeV");
   canvas->SaveAs("./Plots/Data2018XYPar2.pdf");
-
+*/
   //        double dEdXSigCut_ = 9;
   //        double f51Cut_ = 0.85;
   //	TH2D* ABCD;
-  //	ABCD = (TH2D*)NOTRG1->Get("Flow_HLT_Energy_ABCD");
+  //	ABCD = (TH2D*)fin0->Get("Flow_HLT_Energy_ABCD");
   //        ABCD->SetXTitle("f51");
   //        ABCD->SetYTitle("dE/dX significance");
   //        ABCD->SetTitle("");
