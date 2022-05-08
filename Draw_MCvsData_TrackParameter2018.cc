@@ -8,9 +8,9 @@ void Draw_MCvsData_TrackParameter2018()
 {
 
   TCanvas    *canvas = new TCanvas("canvas", "", 800, 600);
-  TFile      *fin1   = new TFile("BlindAnalysis.root");
-  TDirectory *NOTRG1 = (TDirectory *)fin1->Get("HLT_Photon");
-  NOTRG1->cd();
+  TFile      *fin0   = new TFile("BlindAnalysis.root");
+  TDirectory *NOTRG0 = (TDirectory *)fin1->Get("HLT_Photon");
+  NOTRG0->cd();
   gStyle->SetOptStat(0);
 
   TFile      *fin2   = new TFile("MonoPhotonAnalysis_2018_1000.root");
