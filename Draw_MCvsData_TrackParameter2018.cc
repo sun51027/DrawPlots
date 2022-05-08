@@ -74,6 +74,14 @@ void Draw_MCvsData_TrackParameter2018()
 	for(int i=1;i<9;i++){
 					RZPar0_MC[i]->Draw("same hist");
 	}
+	RZPar0_MC[1]->SetLineColor(2);
+	RZPar0_MC[2]->SetLineColor(30);
+	RZPar0_MC[3]->SetLineColor(4);
+	RZPar0_MC[4]->SetLineColor(6);
+	RZPar0_MC[5]->SetLineColor(38);
+	RZPar0_MC[6]->SetLineColor(8);
+	RZPar0_MC[7]->SetLineColor(9);
+	RZPar0_MC[8]->SetLineColor(44);
   mgr::SetSinglePad(canvas);
   mgr::SetAxis(Data_RZPar0);
   mgr::DrawEntryRight("2018 13TeV");
