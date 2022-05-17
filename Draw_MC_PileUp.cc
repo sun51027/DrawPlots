@@ -16,7 +16,7 @@ using namespace mgr;
 void NPVvsF51_noCut(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_MC3, TDirectory *DC_MC4)
 {
 
-  TCanvas  *canvas = new TCanvas("canvas", "", 600, 600);
+  TCanvas  *canvas = new TCanvas("canvas", "", 800, 600);
   TProfile *MC1_Flow_dEdxSig_PileUp_f51, *MC2_Flow_dEdxSig_PileUp_f51, *MC3_Flow_dEdxSig_PileUp_f51,
     *MC4_Flow_dEdxSig_PileUp_f51;
   MC1_Flow_dEdxSig_PileUp_f51 = (TProfile *)DC_MC1->Get("PileUp_f51");
@@ -51,7 +51,7 @@ void NPVvsF51_noCut(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_MC3, 
   TLegend *leg = new TLegend(0.25, 0.20, 0.55, 0.40);
   leg->SetBorderSize(0);
   leg->SetFillColorAlpha(0, 0);
-  leg->SetTextSize(0.03);
+  leg->SetTextSize(0.04);
   leg->AddEntry(MC1_Flow_dEdxSig_PileUp_f51, "1TeV", "p");
   leg->AddEntry(MC2_Flow_dEdxSig_PileUp_f51, "2TeV", "p");
   leg->AddEntry(MC3_Flow_dEdxSig_PileUp_f51, "3TeV", "p");
@@ -61,12 +61,13 @@ void NPVvsF51_noCut(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_MC3, 
   //	leg->AddEntry((TObject*)0, "|#eta| < 3.0 (Whole Ecal) ", "");
   leg->Draw();
   canvas->SaveAs("NPV-f51_noCut.pdf");
-  canvas->SaveAs("NPV-f51_noCut.png");
+  canvas->SaveAs("~/Atom/NTU-Thesis-LaTeX-Template/figures/NPV-f51_noCut.pdf");
+//  canvas->SaveAs("NPV-f51_noCut.png");
 }
 void NPVvsDedxSig_noCut(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_MC3, TDirectory *DC_MC4)
 {
 
-  TCanvas  *canvas = new TCanvas("canvas", "", 600, 600);
+  TCanvas  *canvas = new TCanvas("canvas", "", 800, 600);
   TProfile *MC1_Flow_dEdxSig_PileUp_DedXSig, *MC2_Flow_dEdxSig_PileUp_DedXSig, *MC3_Flow_dEdxSig_PileUp_DedXSig,
     *MC4_Flow_dEdxSig_PileUp_DedXSig;
   MC1_Flow_dEdxSig_PileUp_DedXSig = (TProfile *)DC_MC1->Get("PileUp_DedXSig");
@@ -101,7 +102,7 @@ void NPVvsDedxSig_noCut(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_M
   TLegend *leg = new TLegend(0.25, 0.20, 0.55, 0.40);
   leg->SetBorderSize(0);
   leg->SetFillColorAlpha(0, 0);
-  leg->SetTextSize(0.03);
+  leg->SetTextSize(0.04);
   leg->AddEntry(MC1_Flow_dEdxSig_PileUp_DedXSig, "1TeV", "p");
   leg->AddEntry(MC2_Flow_dEdxSig_PileUp_DedXSig, "2TeV", "p");
   leg->AddEntry(MC3_Flow_dEdxSig_PileUp_DedXSig, "3TeV", "p");
@@ -112,13 +113,13 @@ void NPVvsDedxSig_noCut(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_M
   //	leg->AddEntry((TObject*)0, "|#eta| < 3.0 (Whole Ecal) ", "");
   leg->Draw();
   canvas->SaveAs("NPV-dEdxSig_noCut.pdf");
-  canvas->SaveAs("NPV-dEdxSig_noCut.png");
+  canvas->SaveAs("~/Atom/NTU-Thesis-LaTeX-Template/figures/NPV-dEdxSig_noCut.pdf");
 }
 /*-----------------HLT--------------------*/
 void NPVvsF51(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_MC3, TDirectory *DC_MC4)
 {
 
-  TCanvas  *canvas = new TCanvas("canvas", "", 600, 600);
+  TCanvas  *canvas = new TCanvas("canvas", "", 800, 600);
   TProfile *MC1_Flow_dEdxSig_PileUp_f51, *MC2_Flow_dEdxSig_PileUp_f51, *MC3_Flow_dEdxSig_PileUp_f51,
     *MC4_Flow_dEdxSig_PileUp_f51;
   MC1_Flow_dEdxSig_PileUp_f51 = (TProfile *)DC_MC1->Get("Flow_dEdxSig_PileUp_f51");
@@ -153,7 +154,7 @@ void NPVvsF51(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_MC3, TDirec
   TLegend *leg = new TLegend(0.25, 0.20, 0.55, 0.40);
   leg->SetBorderSize(0);
   leg->SetFillColorAlpha(0, 0);
-  leg->SetTextSize(0.03);
+  leg->SetTextSize(0.04);
   leg->AddEntry(MC1_Flow_dEdxSig_PileUp_f51, "1TeV", "p");
   leg->AddEntry(MC2_Flow_dEdxSig_PileUp_f51, "2TeV", "p");
   leg->AddEntry(MC3_Flow_dEdxSig_PileUp_f51, "3TeV", "p");
@@ -163,12 +164,12 @@ void NPVvsF51(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_MC3, TDirec
   //	leg->AddEntry((TObject*)0, "|#eta| < 3.0 (Whole Ecal) ", "");
   leg->Draw();
   canvas->SaveAs("NPV-f51.pdf");
-  canvas->SaveAs("NPV-f51.png");
+  canvas->SaveAs("~/Atom/NTU-Thesis-LaTeX-Template/figures/NPV-f51.pdf");
 }
 void NPVvsDedxSig(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_MC3, TDirectory *DC_MC4)
 {
 
-  TCanvas  *canvas = new TCanvas("canvas", "", 600, 600);
+  TCanvas  *canvas = new TCanvas("canvas", "", 800, 600);
   TProfile *MC1_Flow_dEdxSig_PileUp_DedXSig, *MC2_Flow_dEdxSig_PileUp_DedXSig, *MC3_Flow_dEdxSig_PileUp_DedXSig,
     *MC4_Flow_dEdxSig_PileUp_DedXSig;
   MC1_Flow_dEdxSig_PileUp_DedXSig = (TProfile *)DC_MC1->Get("Flow_dEdxSig_PileUp_DedXSig");
@@ -203,7 +204,7 @@ void NPVvsDedxSig(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_MC3, TD
   TLegend *leg = new TLegend(0.25, 0.20, 0.55, 0.40);
   leg->SetBorderSize(0);
   leg->SetFillColorAlpha(0, 0);
-  leg->SetTextSize(0.03);
+  leg->SetTextSize(0.04);
   leg->AddEntry(MC1_Flow_dEdxSig_PileUp_DedXSig, "1TeV", "p");
   leg->AddEntry(MC2_Flow_dEdxSig_PileUp_DedXSig, "2TeV", "p");
   leg->AddEntry(MC3_Flow_dEdxSig_PileUp_DedXSig, "3TeV", "p");
@@ -214,7 +215,7 @@ void NPVvsDedxSig(TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_MC3, TD
   //	leg->AddEntry((TObject*)0, "|#eta| < 3.0 (Whole Ecal) ", "");
   leg->Draw();
   canvas->SaveAs("NPV-dEdxSig.pdf");
-  canvas->SaveAs("NPV-dEdxSig.png");
+  canvas->SaveAs("~/Atom/NTU-Thesis-LaTeX-Template/figures/NPV-dEdxSig.pdf");
 }
 void Draw_MC_PileUp()
 {
