@@ -53,6 +53,7 @@
 #define PRELIMINARY 0
 #define SIMULATION  1
 #define WORK 2
+#define GEN 3
 #define PUBLISH     -1
 
 #endif/* end of include guard: MANAGERUTILS_PLOTUTILS_CONSTANTS_HPP */

@@ -73,7 +73,8 @@ TPad *NewRightPad()
 {
   TPad *pad = new TPad("rightpad", "", LEFT_RIGHT_SEP, 0., 1., 1.);
   pad->SetTicks(1, 1);
-  pad->SetLeftMargin(0.025);
+//  pad->SetLeftMargin(0.1);
+  //pad->SetLeftMargin(0.025);
   //pad->SetTopMargin(PLOT_Y_MIN);
   //pad->SetBottomMargin(0.9);
   //pad->SetBottomMargin(1 - PLOT_Y_MAX);

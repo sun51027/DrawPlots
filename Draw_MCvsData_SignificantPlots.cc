@@ -129,7 +129,6 @@ TH1 *Drawf51(TDirectory *DC_data, TDirectory *DC_MC1, TDirectory *DC_MC2, TDirec
 TH1 *DrawDedXSig(TDirectory *DC_data, TDirectory *DC_MC1, TDirectory *DC_MC2, TDirectory *DC_MC3, TDirectory *DC_MC4,
                  TDirectory *DC_MC5)
 {
-
   TCanvas *canvas = new TCanvas("canvas", "", 800, 600);
   TH1D    *MC1_DedXSig, *MC2_DedXSig, *MC3_DedXSig, *MC4_DedXSig, *MC5_DedXSig;
   MC1_DedXSig = (TH1D *)DC_MC1->Get("DedXSig");
@@ -160,7 +159,7 @@ TH1 *DrawDedXSig(TDirectory *DC_data, TDirectory *DC_MC1, TDirectory *DC_MC2, TD
   MC3_DedXSig->Draw("HIST same");
   MC4_DedXSig->Draw("HIST same");
   //  MC5_DedXSig->Draw("HIST same");
-  Data_DedXSig->Draw("same");
+//  Data_DedXSig->Draw("same");
   MC1_DedXSig->SetLineColorAlpha(30, 1);
   MC2_DedXSig->SetLineColorAlpha(38, 1);
   MC3_DedXSig->SetLineColorAlpha(46, 1);
@@ -183,13 +182,13 @@ TH1 *DrawDedXSig(TDirectory *DC_data, TDirectory *DC_MC1, TDirectory *DC_MC2, TD
   leg->AddEntry(MC2_DedXSig, "2TeV", "L");
   leg->AddEntry(MC3_DedXSig, "3TeV", "L");
   leg->AddEntry(MC4_DedXSig, "4TeV", "L");
-  leg->AddEntry(Data_DedXSig, "Data", "p");
+//  leg->AddEntry(Data_DedXSig, "Data", "p");
   leg->Draw();
+  canvas->SetLogy(1);
   canvas->SaveAs("MCvsData_2018_DedXSig.pdf");
 
   delete canvas;
   return MC1_DedXSig;
-  //		canvas->SaveAs("MC2018_DedXSig.pdf");
 }
 TH2 *DrawFracSatVNstrips(TDirectory *DC_data, TDirectory *DC_MC1)
 {
@@ -198,7 +197,8 @@ TH2 *DrawFracSatVNstrips(TDirectory *DC_data, TDirectory *DC_MC1)
   TH2D    *MC1_FracSatVNstrips;
   MC1_FracSatVNstrips = (TH2D *)DC_MC1->Get("Flow_dEdxSig_FracSatVNstrips");
   TH2D *Data_FracSatVNstrips;
-  Data_FracSatVNstrips = (TH2D *)DC_data->Get("Blinded_FracSatVNstrips");
+  Data_FracSatVNstrips = (TH2D *)DC_data->Get("FracSatVNstrips");
+  //Data_FracSatVNstrips = (TH2D *)DC_data->Get("Blinded_FracSatVNstrips");
   MC1_FracSatVNstrips->SetYTitle("Fraction of saturated strips");
   MC1_FracSatVNstrips->SetXTitle("Total number of strips");
   MC1_FracSatVNstrips->SetTitle("");
@@ -229,8 +229,8 @@ TH2 *DrawFracSatVNstrips(TDirectory *DC_data, TDirectory *DC_MC1)
   mgr::SetSinglePad(canvas);
   mgr::SetAxis(MC1_FracSatVNstrips);
   mgr::DrawCMSLabelOuter(PRELIMINARY);
-  mgr::DrawEntryRight("32.93fb^{-1} (13TeV)");
-  // canvas->SaveAs("MCvsData_2018_FracSatVNstrips.pdf");
+  mgr::DrawEntryRight("1.8fb^{-1} 13TeV");
+   canvas->SaveAs("MCvsData_2018_FracSatVNstrips.pdf");
   //	delete canvas;
   return MC1_FracSatVNstrips;
 }
@@ -305,7 +305,7 @@ void Draw_MCvsData_SignificantPlots()
   gStyle->SetOptStat(0);
 
   // data
-  TFile      *fin_data = new TFile("RootFile/BlindAnalysis.root");
+  TFile      *fin_data = new TFile("RootFile/MonoData2018_Plot.root");
   TDirectory *DC_data  = (TDirectory *)fin_data->Get("HLT_Photon");
   DC_data->cd();
   // MC 1TeV
@@ -329,9 +329,10 @@ void Draw_MCvsData_SignificantPlots()
   TDirectory *DC_MC5 = (TDirectory *)fin5->Get("HLT_Photon200");
   DC_MC5->cd();
 
-  //  DrawFracSatVNstrips(DC_data, DC_MC1);
+    DrawFracSatVNstrips(DC_data, DC_MC1);
   //  DrawDedXSig(DC_data, DC_MC1, DC_MC2, DC_MC3, DC_MC4, DC_MC5);
+  
   //  Drawf51(DC_data, DC_MC1, DC_MC2, DC_MC3, DC_MC4);
   // DrawHIso(DC_data, DC_MC1, DC_MC2, DC_MC3, DC_MC4);
-  DrawNPV(DC_data, DC_MC1, DC_MC2, DC_MC3, DC_MC4);
+//  DrawNPV(DC_data, DC_MC1, DC_MC2, DC_MC3, DC_MC4);
 }

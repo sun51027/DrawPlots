@@ -64,6 +64,7 @@ void mgr::SetRightPlotAxis(T *plot)
 {
   SetAxis(plot);
   plot->GetXaxis()->SetLabelSize(0);
+  plot->GetXaxis()->SetNdivisions(503);
   plot->GetXaxis()->SetTitleSize(0);
   plot->GetYaxis()->SetLabelSize(0);
   plot->GetYaxis()->SetTitleSize(0);

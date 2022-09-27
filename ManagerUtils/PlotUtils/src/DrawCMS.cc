@@ -28,6 +28,9 @@ namespace mgr{
         else if( tag == WORK ){
             tl.DrawLatex( PLOT_X_MIN + TEXT_MARGIN, PLOT_Y_MAX - TEXT_MARGIN - LINE_HEIGHT, "#it{Work in progress}" );
         }
+        else if( tag == GEN){
+            tl.DrawLatex( PLOT_X_MIN + TEXT_MARGIN, PLOT_Y_MAX - TEXT_MARGIN - LINE_HEIGHT, "#it{Generator}" );
+        }
     }
 
     /******************************************************************************/
@@ -50,6 +53,9 @@ namespace mgr{
         }
         else if( tag == WORK ){
             text += "#it{Work in progress}";
+        }
+        else if( tag == GEN ){
+            text += "#it{Generator}";
         }
 
         tl.DrawLatex( PLOT_X_MIN, PLOT_Y_MAX + TEXT_MARGIN / 2, text.c_str() );
